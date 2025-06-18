@@ -424,6 +424,38 @@ TEST_ZHIHU_ZTEXT_HTML = [
         'expected_formula': r'\begin{aligned}  & p(r|s,a) \\  & \sum_{r\in\mathcal{R}(s,a)}p(r|s,a)=1\text{ for any }(s,a). \end{aligned}'
     }
 ]
+
+TEST_MATHJAX_BEGIN_END_ENV = [
+    {
+        'input': r'''
+        <p>The following is another example function that has partial derivatives at
+        the origin but is not differentiable.  For this example, we have an
+        equation for the function.
+        \begin{align*}
+          f(x,y) =
+          \begin{cases}
+            \displaystyle
+            \frac{x^2y}{x^2+y^2} &amp; \text{if } (x,y) \ne (0,0)\\
+            0 &amp; \text{if } (x,y) = (0.0)
+          \end{cases}
+        \end{align*}
+        </p>
+        ''',
+        'expected_tag': 'ccmath-interline',
+        'expected_formula': r'''
+        $$
+        \begin{align*}
+          f(x,y) =
+          \begin{cases}
+            \displaystyle
+            \frac{x^2y}{x^2+y^2} & \text{if } (x,y) \ne (0,0)\\
+            0 & \text{if } (x,y) = (0.0)
+          \end{cases}
+        \end{align*}
+        $$
+        '''
+    }
+]
 base_dir = Path(__file__).parent
 
 
