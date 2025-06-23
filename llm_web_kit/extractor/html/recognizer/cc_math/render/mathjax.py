@@ -1,9 +1,8 @@
 import re
 from typing import Any, Dict, List
 
-from llm_web_kit.extractor.html.recognizer.cc_math.common import MATHINSIGHT
-from llm_web_kit.extractor.html.recognizer.cc_math.config.mathsight.formula_conversion import \
-    convert_to_standard_latex
+from llm_web_kit.extractor.html.recognizer.cc_math.common import (
+    MATHINSIGHT, MATHINSIGHT_convert_to_standard_latex)
 from llm_web_kit.extractor.html.recognizer.cc_math.render.render import (
     BaseMathRender, MathRenderType)
 from llm_web_kit.libs.html_utils import HtmlElement, html_to_element
@@ -379,7 +378,7 @@ class MathJaxRender(BaseMathRender):
 
             # 限定MATHINSIGHT域名
             if MATHINSIGHT.DOMAIN in self.url:
-                formula = convert_to_standard_latex(formula)
+                formula = MATHINSIGHT_convert_to_standard_latex(formula)
             start_pos = match.start()
             end_pos = match.end()
 
@@ -450,7 +449,7 @@ class MathJaxRender(BaseMathRender):
             formula = f'\\begin{{{env_name}}}{formula}\\end{{{env_name}}}'
             # 将自定义LaTeX转换为标准LaTeX格式
             if MATHINSIGHT.DOMAIN in self.url:
-                formula = convert_to_standard_latex(formula)
+                formula = MATHINSIGHT_convert_to_standard_latex(formula)
 
             start_pos = match.start()
             end_pos = match.end()
